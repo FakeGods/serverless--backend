@@ -1,0 +1,20 @@
+{
+  "name": "serverless-backend",
+  "version": "0.1.0",
+  "bin": {
+    "serverless-backend": "bin/serverless-backend.js"
+  },
+  "scripts": {
+    "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",
+    "cdk": "cdk",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "aws-cdk": "2.1006.0",
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.185.0",
+    "constructs": "^10.0.0"
+  }
+}
