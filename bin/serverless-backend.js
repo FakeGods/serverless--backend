@@ -1,22 +1,28 @@
 #!/usr/bin/env node
 
-
 const cdk = require('aws-cdk-lib');
 const { ServerlessBackendStack } = require('../lib/serverless-backend-stack');
 
 const app = new cdk.App();
+
+/**
+ * Retrieve Cognito User Pool ARN from context or environment variable
+ * Usage: cdk deploy -c cognitoUserPoolArn="arn:aws:cognito-idp:..."
+ * Or set environment variable: COGNITO_USER_POOL_ARN
+ */
+const cognitoUserPoolArn =
+  app.node.tryGetContext('cognitoUserPoolArn') ||
+  process.env.COGNITO_USER_POOL_ARN;
+
+if (!cognitoUserPoolArn) {
+  throw new Error(
+    'Cognito User Pool ARN is required. ' +
+    'Provide it using: cdk deploy -c cognitoUserPoolArn="arn:..." ' +
+    'or set COGNITO_USER_POOL_ARN environment variable'
+  );
+}
+
 new ServerlessBackendStack(app, 'ServerlessBackendStack', {
-  /* If you don't specify 'env', this stack will be environment-agnostic.
-   * Account/Region-dependent features and context lookups will not work,
-   * but a single synthesized template can be deployed anywhere. */
-
-  /* Uncomment the next line to specialize this stack for the AWS Account
-   * and Region that are implied by the current CLI configuration. */
-  // env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
-
-  /* Uncomment the next line if you know exactly what Account and Region you
-   * want to deploy the stack to. */
-   env: { account: '695438154048', region: 'eu-central-1' },
-
-  /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
+  env: { account: '695438154048', region: 'eu-central-1' },
+  cognitoUserPoolArn,
 });
