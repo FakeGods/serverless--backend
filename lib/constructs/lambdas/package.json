@@ -1,0 +1,11 @@
+{
+  "name": "recommendation-lambdas",
+  "version": "1.0.0",
+  "description": "Lambda functions for recommendation system",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.0.0",
+    "@aws-sdk/lib-dynamodb": "^3.0.0",
+    "@aws-sdk/client-sns": "^3.0.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.0.0"
+  }
+}
